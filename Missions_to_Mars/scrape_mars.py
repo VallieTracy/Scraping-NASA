@@ -33,7 +33,4 @@ def scrape():
       "Teaser": news_p
    }
 
-   # Close the browser after scraping
-   browser.quit()
-
    return news_data
