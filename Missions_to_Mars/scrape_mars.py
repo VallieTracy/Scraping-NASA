@@ -46,10 +46,39 @@ def scrape():
 
    featured_img_url = f'https://www.jpl.nasa.gov{featured_img_rel}'
 
+   # Mars Facts
+   # Visit the Mars Facts webpage
+   mars_facts_url = 'https://space-facts.com/mars/'
    
-
+   # Use Pandas to read the tables from the webpage
+   tables = pd.read_html(mars_facts_url)
    
+   # Specify which table we want
+   table_one_df = tables[0]
 
+   # Rename the columns
+   table_one_df.columns = ["Mars Planet Profile", "Values"]
+
+   # Reset the index
+   table_one_df.set_index("Mars Planet Profile", inplace=True)
+
+   html_table = table_one_df.to_html()
+
+   html_table = html_table.replace('\n', '')
+
+   # Mars Hemispheres
+   # Mars hemispheres url
+   hemi_url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
+   browser.visit(hemi_url)
+
+   time.sleep(1)
+
+   # Convert the browser html to a soup object
+   hemi_html = browser.html
+   hemi_soup = bs(hemi_html, "html.parser")
+
+   # Parent html that holds the title and link to individual hemispheres
+   hemi_parent = hemi_soup.select_one("div.result-list div.item")
    
    
    
@@ -59,7 +88,8 @@ def scrape():
    mars_dictionary = {
       "Top_News": news_title,
       "Teaser_P": news_p,
-      "Featured_Image": featured_img_url}
+      "Featured_Image": featured_img_url,
+      "Mars_Info_Table": html_table}
    #print(news_data)  # DEBUG
 
    return mars_dictionary

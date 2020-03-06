@@ -23,19 +23,26 @@
       <br>
       
       <div class="container-fluid">
+        
         <div class="col-lg-8">
           <h3><b>Featured Mars Image</b></h3>
           <img src="{{ mars.Featured_Image }}" alt="Feat Img" class="img-thumbnail float-left w-50 h-50">
         </div> 
+        
         <div class="col-lg-4">
           <h4><b>Current Weather on Mars:</b></h4>
           <br>
           <h4><b><u>Mars Facts</u></b></h4>
+          <!-- Mars Facts Table -->
+          <h4>{{ mars.Mars_Info_Table | safe}}</h4>
+  
+          <!-- End Table -->
         </div>
+      
       </div>
 
-    </div>
     
+    </div>
 </body>
   
 </html>
