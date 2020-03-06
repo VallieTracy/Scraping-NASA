@@ -16,12 +16,15 @@ def scrape():
    url = 'https://mars.nasa.gov/news/'
    browser.visit(url)
 
+   time.sleep(1)
+
    # Scrape page into soup
    browser_html = browser.html
    news_soup = bs(browser_html, "html.parser")
 
    # Get most recent headline
    slide_element = news_soup.select_one("ul.item_list li.slide")
+   print(slide_element)
    news_title = slide_element.find("div", class_="content_title").find("a").text
 
    # Get first snippet of article text
@@ -29,8 +32,9 @@ def scrape():
 
    # Store data in a dictionary
    news_data = {
-      "Top News": news_title,
-      "Teaser": news_p
+      "Top_News": news_title,
+      "teaser_p": news_p
    }
+   #print(news_data)  # DEBUG
 
    return news_data
