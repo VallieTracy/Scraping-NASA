@@ -33,7 +33,7 @@ def scrape():
    # Store data in a dictionary
    news_data = {
       "Top_News": news_title,
-      "teaser_p": news_p
+      "Teaser_P": news_p
    }
    #print(news_data)  # DEBUG
 
