@@ -47,6 +47,10 @@ def scrape():
    featured_img_url = f'https://www.jpl.nasa.gov{featured_img_rel}'
 
    
+
+   
+
+   
    
    
    
