@@ -24,13 +24,13 @@ def index():
 
 # Route that will trigger the scrape function
 @app.route("/scrape")
-def scrape():
+def scrape():    
 
     # Run the scrape function
-    news_data = scrape_mars.scrape()
+    mars_dictionary = scrape_mars.scrape()
 
     # Update the Mongo database using update and upsert=True
-    mongo.db.collection.update({}, news_data, upsert=True)
+    mongo.db.collection.update({}, mars_dictionary, upsert=True)
 
     # Redirect back to home page
     return redirect("/")
@@ -39,7 +39,3 @@ def scrape():
 if __name__ == "__main__":
     app.run(debug=True)
 
-# costa_data ~ news_data
-# scrape_costa ~ scrape_mars
-# scrape_info within scrape_costa
-    # ~        within scrape_mars

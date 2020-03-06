@@ -11,14 +11,18 @@
 
 <body>
     <div class="container-fluid">
+      
       <div class="jumbotron text-center">
         <h1>Mission to Mars</h1>
         <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
       </div>
       
-      <h2>The typical weather in Costa Rica is:</h2>
-      <h3>Headline: {{ mars.Top_News }}</h3>
-      <h3>Text: {{ mars.Teaser_P }}</h3>
+      <h3><b><u>Latest Mars News</u></b></h3>
+      <h4><b>{{ mars.Top_News }}</b></h4>
+      <h5>{{ mars.Teaser_P }}</h5>
+      <br>
+      <h3><b>Featured Mars Image</b></h3>
+      <img src="{{ mars.Featured_Image }}" alt="Feat Img"
     </div>
     
 </body>

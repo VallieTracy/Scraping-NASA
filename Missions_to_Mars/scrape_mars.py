@@ -30,11 +30,32 @@ def scrape():
    # Get first snippet of article text
    news_p = slide_element.find("div", class_="article_teaser_body").text
 
+   # Scrape for JPL Mars Space Images
+   # URL to visit through chromedriver
+   url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
+   browser.visit(url)
+
+   time.sleep(1)
+
+   browser.click_link_by_partial_text('FULL IMAGE')
+   image_html = browser.html
+
+   image_soup = bs(image_html, "html.parser")
+   featured_img_rel = image_soup.select_one(".carousel_item").get("style")
+   featured_img_rel = featured_img_rel.split("\'")[1]
+
+   featured_img_url = f'https://www.jpl.nasa.gov{featured_img_rel}'
+
+   
+   
+   
+   
+   
    # Store data in a dictionary
-   news_data = {
+   mars_dictionary = {
       "Top_News": news_title,
-      "Teaser_P": news_p
-   }
+      "Teaser_P": news_p,
+      "Featured_Image": featured_img_url}
    #print(news_data)  # DEBUG
 
-   return news_data
+   return mars_dictionary
