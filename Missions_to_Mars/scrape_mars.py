@@ -80,8 +80,33 @@ def scrape():
    # Parent html that holds the title and link to individual hemispheres
    hemi_parent = hemi_soup.select_one("div.result-list div.item")
    
+   # Title text listed under parent element within <h3> code
+   title = hemi_parent.find("h3").text
+
+   # Full image located at a different url
+   # First need image parent
+   image_parent = hemi_parent.find("div", class_="description")
+
+   # 'Tail' portion of url which will direct us to url with full-size image
+   image_link_partial = image_parent.find("a")["href"]
+
+   # Visit the url where the full-size image lives
+   link = 'https://astrogeology.usgs.gov' + image_link_partial
+   browser.visit(link)
+
+   time.sleep(1)
+
+   # Convert browser to html
+   image_html = browser.html
+
+   #Convert to a soup object
+   image_soup = bs(image_html, "html.parser")
+
+   # Parent element of the full-size image
+   full_img_parent = image_soup.select_one("div.wide-image-wrapper div.downloads")
    
-   
+   # Find the full-size image url within the parent element
+   img_url = full_img_parent.find("a")["href"]
    
    
    # Store data in a dictionary
@@ -89,7 +114,9 @@ def scrape():
       "Top_News": news_title,
       "Teaser_P": news_p,
       "Featured_Image": featured_img_url,
-      "Mars_Info_Table": html_table}
+      "Mars_Info_Table": html_table,
+      "First_Hemi_Title": title,
+      "First_Hemi_Img": img_url}
    #print(news_data)  # DEBUG
 
    return mars_dictionary
